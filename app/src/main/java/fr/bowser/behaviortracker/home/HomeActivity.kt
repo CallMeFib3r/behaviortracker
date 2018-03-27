@@ -1,5 +1,6 @@
 package fr.bowser.behaviortracker.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -11,6 +12,7 @@ import android.view.MenuItem
 import fr.bowser.behaviortracker.R
 import fr.bowser.behaviortracker.config.BehaviorTrackerApp
 import fr.bowser.behaviortracker.createtimer.CreateTimerDialog
+import fr.bowser.behaviortracker.shortcut.TimerShortcutManager
 import fr.bowser.behaviortracker.timerlist.TimerFragment
 import javax.inject.Inject
 
@@ -29,7 +31,12 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
         displayTimerFragment()
 
-        manageIntent()
+        manageIntent(intent)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        manageIntent(intent)
     }
 
     override fun onStart() {
@@ -89,18 +96,30 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
         }
     }
 
-    private fun manageIntent() {
-        if (intent.action == CREATE_TIMER_FROM_SHORTCUT) {
-            CreateTimerDialog.showDialog(this, true)
+    private fun manageIntent(intent: Intent?) {
+        when {
+            intent?.action == CREATE_TIMER_FROM_SHORTCUT -> CreateTimerDialog.showDialog(this, true)
+            intent?.action == TimerShortcutManager.START_TIMER_FROM_SHORTCUT -> presenter.startTimer(getTimerIdFromIntent(intent))
         }
     }
 
-    private inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
+    private fun getTimerIdFromIntent(intent: Intent?): Long {
+        val timerId = intent?.getLongExtra(TimerShortcutManager.SHORTCUT_KEY_TIMER_ID,
+                -1)
+        if (timerId == -1L || timerId == null) {
+            throw IllegalArgumentException("No data with key SHORTCUT_KEY_TIMER_ID has been " +
+                    "attached to the intent.")
+        }
+        return timerId
+    }
+
+    private inline fun FragmentManager.inTransaction(func: FragmentTransaction.() ->
+    FragmentTransaction) {
         beginTransaction().func().commit()
     }
 
     companion object {
-        const val CREATE_TIMER_FROM_SHORTCUT = "android.intent.action.CREATE_TIMER";
+        const val CREATE_TIMER_FROM_SHORTCUT = "android.intent.action.CREATE_TIMER"
     }
 
 }

@@ -6,14 +6,15 @@ import android.os.StrictMode
 import com.crashlytics.android.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import fr.bowser.behaviortracker.BuildConfig
+import fr.bowser.behaviortracker.shortcut.TimerShortcutManager
 import io.fabric.sdk.android.Fabric
-
-
 
 
 class BehaviorTrackerApp : Application(){
 
-    lateinit var appComponent: BehaviorTrackerAppComponent
+    private lateinit var appComponent: BehaviorTrackerAppComponent
+
+    private lateinit var timerShortcutManager : TimerShortcutManager
 
     override fun onCreate() {
         if (BuildConfig.DEBUG) {
@@ -44,6 +45,7 @@ class BehaviorTrackerApp : Application(){
         appComponent = DaggerBehaviorTrackerAppComponent.builder()
                 .context(this)
                 .build()
+        timerShortcutManager = appComponent.provideTimerShortcutManager()
     }
 
     private fun setupFirebaseAnalytics() {

@@ -15,6 +15,8 @@ interface TimerListManager {
 
     fun unregisterTimerCallback(timerCallback: TimerCallback): Boolean
 
+    fun getTimer(timerId: Long): Timer
+
     interface TimerCallback {
         fun onTimerRemoved(updatedTimer: Timer)
         fun onTimerAdded(updatedTimer: Timer)

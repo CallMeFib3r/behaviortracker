@@ -18,6 +18,8 @@ interface HomeContract {
 
         fun onClickResetAllTimers()
 
+        fun startTimer(timerId: Long)
+
     }
 
 }

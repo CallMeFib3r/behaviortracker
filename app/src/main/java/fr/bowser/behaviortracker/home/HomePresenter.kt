@@ -29,4 +29,10 @@ class HomePresenter(private val view: HomeContract.View,
             timeManager.stopTimer(timer)
         }
     }
+
+    override fun startTimer(timerId: Long) {
+        val timer = timerListManager.getTimer(timerId)
+        timeManager.startTimer(timer)
+    }
+
 }

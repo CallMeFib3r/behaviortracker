@@ -7,6 +7,8 @@ import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
 import fr.bowser.behaviortracker.notification.TimeNotificationManagerModule
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
+import fr.bowser.behaviortracker.shortcut.TimerShortcutManager
+import fr.bowser.behaviortracker.shortcut.TimerShortcutManagerModule
 import fr.bowser.behaviortracker.timer.TimeManager
 import fr.bowser.behaviortracker.timer.TimeManagerModule
 import fr.bowser.behaviortracker.timer.TimerListManager
@@ -17,6 +19,7 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(DatabaseManagerModule::class,
         TimeManagerModule::class,
         TimeNotificationManagerModule::class,
+        TimerShortcutManagerModule::class,
         TimerListManagerModule::class))
 interface BehaviorTrackerAppComponent {
 
@@ -27,6 +30,8 @@ interface BehaviorTrackerAppComponent {
     fun provideTimerListManager(): TimerListManager
 
     fun provideTimerNotificationManager(): TimerNotificationManager
+
+    fun provideTimerShortcutManager(): TimerShortcutManager
 
     @Component.Builder
     interface Builder {
