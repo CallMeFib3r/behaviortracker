@@ -8,9 +8,15 @@ interface HomeContract {
 
         fun displaySettingsView()
 
+        fun displayPomodoroView()
+
+        fun displayTimerView()
+
     }
 
     interface Presenter {
+
+        fun initialize()
 
         fun start()
 
@@ -21,6 +27,10 @@ interface HomeContract {
         fun onClickResetAllTimers()
 
         fun onClickSettings()
+
+        fun onClickTimerView()
+
+        fun onClickPomodoroView()
 
     }
 

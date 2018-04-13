@@ -10,6 +10,10 @@ class HomePresenter(private val view: HomeContract.View,
                     private val timerListManager: TimerListManager)
     : HomeContract.Presenter {
 
+    override fun initialize() {
+        view.displayTimerView()
+    }
+
     override fun start() {
         timerNotificationManager.changeNotifOngoing(false)
     }
@@ -32,5 +36,13 @@ class HomePresenter(private val view: HomeContract.View,
 
     override fun onClickSettings() {
         view.displaySettingsView()
+    }
+
+    override fun onClickTimerView() {
+        view.displayTimerView()
+    }
+
+    override fun onClickPomodoroView() {
+        view.displayPomodoroView()
     }
 }
