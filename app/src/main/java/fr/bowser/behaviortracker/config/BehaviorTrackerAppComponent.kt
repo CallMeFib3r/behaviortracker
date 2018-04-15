@@ -7,6 +7,8 @@ import fr.bowser.behaviortracker.database.DatabaseManager
 import fr.bowser.behaviortracker.database.DatabaseManagerModule
 import fr.bowser.behaviortracker.notification.TimeNotificationManagerModule
 import fr.bowser.behaviortracker.notification.TimerNotificationManager
+import fr.bowser.behaviortracker.pomodoro.PomodoroManager
+import fr.bowser.behaviortracker.pomodoro.PomodoroManagerModule
 import fr.bowser.behaviortracker.setting.SettingManager
 import fr.bowser.behaviortracker.setting.SettingManagerModule
 import fr.bowser.behaviortracker.timer.TimeManager
@@ -20,12 +22,15 @@ import javax.inject.Singleton
         TimeManagerModule::class,
         TimeNotificationManagerModule::class,
         SettingManagerModule::class,
+        PomodoroManagerModule::class,
         TimerListManagerModule::class))
 interface BehaviorTrackerAppComponent {
 
     fun provideDatabaseManager(): DatabaseManager
 
     fun provideTimeManager(): TimeManager
+
+    fun providePomodoroManager(): PomodoroManager
 
     fun provideTimerListManager(): TimerListManager
 
