@@ -6,6 +6,7 @@ import android.support.v7.widget.CardView
 import android.support.v7.widget.PopupMenu
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.inflate
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -75,7 +76,7 @@ class TimerRowView(context: Context) :
     fun setTimer(timer: Timer) {
         presenter.setTimer(timer)
 
-        chrono.text = TimeConverter.convertSecondsToHumanTime(timer.currentTime)
+        chrono.text = TimeConverter.convertSecondsToHumanTime(timer.time.toLong())
         tvName.text = timer.name
         color.setBackgroundColor(ColorUtils.getColor(context!!, timer.color))
 
