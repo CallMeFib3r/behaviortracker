@@ -1,7 +1,5 @@
 # Timer
-
-<img src="https://raw.githubusercontent.com/bowserf/behaviortracker/dev/storeresources/background/english/background.png" width="384" height="187" title="Op'Time">
-
+![github_repo-01](https://user-images.githubusercontent.com/37731582/39676996-57ad60d6-5174-11e8-91fe-e3c78f57b646.png)
 ## Goal
 
 Timer is a simple application helping you to track different moments of your day. If you have no
